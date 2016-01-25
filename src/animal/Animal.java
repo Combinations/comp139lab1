@@ -7,7 +7,7 @@ package animal;
 
 /**
  *
- * @author James
+ * @author James L
  */
 public class Animal {
     
