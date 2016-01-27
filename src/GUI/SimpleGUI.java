@@ -5,6 +5,7 @@
  */
 package GUI;
 
+import animal.Animal;
 import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.GridLayout;
@@ -31,11 +32,12 @@ import javax.swing.JTextField;
  */
 public class SimpleGUI extends JFrame implements ActionListener {
 
+    private Animal[] animalsArray = new Animal[10];
     /**
      * GUI component for getting the name
      */
     private GetInputPanel namePanel = null;
-    /** 
+    /**
      * GUI component for getting color
      */
     private GetInputPanel colorPanel = null;
@@ -153,22 +155,22 @@ public class SimpleGUI extends JFrame implements ActionListener {
             verifyArea.append("\nAdd Reptile button presed\n");
             verifyArea.append("name:" + namePanel.getText() + " age: "
                     + agePanel.getValue() + " weight: " + weightPanel.getValue()
-                    + " length: " + lengthPanel.getValue() + " color: " + 
-                    colorPanel.getText());
+                    + " length: " + lengthPanel.getValue() + " color: "
+                    + colorPanel.getText());
         } else if (object == addMammalButton) {
             verifyArea.append("\nAdd Mammal button pressed\n");
             verifyArea.append("name:" + namePanel.getText() + " age: "
                     + agePanel.getValue() + " weight: " + weightPanel.getValue()
-                    + " length: " + lengthPanel.getValue() + " color: " + 
-                    colorPanel.getText());
+                    + " length: " + lengthPanel.getValue() + " color: "
+                    + colorPanel.getText());
         } else if (object == displayAnimalsButton) {
             verifyArea.append("\nDisplay button pressed\n");
             verifyArea.append("name:" + namePanel.getText() + " age: "
                     + agePanel.getValue() + " weight: " + weightPanel.getValue()
-                    + " length: " + lengthPanel.getValue() + " color: " + 
-                    colorPanel.getText());
-        } else if( object==colorPanel) {
-            
+                    + " length: " + lengthPanel.getValue() + " color: "
+                    + colorPanel.getText());
+        } else if (object == colorPanel) {
+
         }
     }
 }
