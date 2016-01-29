@@ -6,8 +6,10 @@
 package animal;
 
 /**
+ * Mammal.java This program describes some basic properties of a mammal. It
+ * inherits the Animal class.
  *
- * @author James
+ * @author James Leahy
  */
 public class Mammal extends Animal {
 
@@ -56,8 +58,13 @@ public class Mammal extends Animal {
 
     }
 
+    /**
+     *
+     * @return the contents of the instance variables as a string value
+     */
     public String toString() {
-        String x = "";
+        String x = "name: " + name + " type: mammal" + " weight: " + weight + " age:" + age
+                + " color: " + color;
         return x;
     }
 }

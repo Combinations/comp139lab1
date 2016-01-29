@@ -5,6 +5,12 @@
  */
 package animal;
 
+import exceptions.InvalidNameException;
+import static exceptions.InvalidNameException.InvalidNameException;
+import exceptions.InvalidWeightException;
+import static exceptions.InvalidWeightException.InvalidWeightException;
+import javax.swing.JOptionPane;
+
 /**
  * Animal.java This program describes some basic properties of an animal. It
  * will be inherited by reptile and mammal classes.
@@ -36,9 +42,19 @@ public class Animal {
      * @throw NumberformatException
      */
     public Animal(String n, Double w, int a) {
-        name = n;
         age = a;
-        weight = w;
+        try {
+            InvalidWeightException(w);
+            weight = w;
+        } catch (InvalidWeightException e) {
+            JOptionPane.showMessageDialog(null, "Weight must be > 0");
+        }
+        try {
+            InvalidNameException(n);
+            name = n;
+        } catch (InvalidNameException e) {
+            JOptionPane.showMessageDialog(null, "Name length must be > 2");
+        }
 
     }
 
@@ -46,10 +62,15 @@ public class Animal {
      * changes the name variable to the String parameter specified by the user.
      *
      * @param changeName String value that represents the name of an animal.
-     * @throws InvalidNameException
+     *
      */
     public void setName(String changeName) {
-        name = changeName;
+        try {
+            InvalidNameException(changeName);
+            name = changeName;
+        } catch (InvalidNameException e) {
+            JOptionPane.showMessageDialog(null, "Name length must be > 2");
+        }
     }
 
     /**
@@ -65,10 +86,14 @@ public class Animal {
      * changes the weight of an animal to the value specified by the user.
      *
      * @param changeWeight Double value that represents the weight of an Animal.
-     * @throws InvalidWeightException if the weight is not > 0.
      */
     public void setWeight(double changeWeight) {
-        weight = changeWeight;
+        try {
+            InvalidWeightException(changeWeight);
+            weight = changeWeight;
+        } catch (InvalidWeightException e) {
+            JOptionPane.showMessageDialog(null, "Weight must be > 0");
+        }
     }
 
     /**
@@ -102,11 +127,16 @@ public class Animal {
      * Display the contents of the global variables.
      */
     public void display() {
+        String values = toString();
 
     }
 
+    /**
+     *
+     * @return returns the contents of the instance variables as a string
+     */
     public String toString() {
-        String x = "";
+        String x = "name: " + name + " weight: " + weight + " age:" + age;
         return x;
     }
 

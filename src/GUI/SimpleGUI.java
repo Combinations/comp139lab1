@@ -6,6 +6,8 @@
 package GUI;
 
 import animal.Animal;
+import animal.Mammal;
+import animal.Reptile;
 import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.GridLayout;
@@ -32,7 +34,14 @@ import javax.swing.JTextField;
  */
 public class SimpleGUI extends JFrame implements ActionListener {
 
-    private Animal[] animalsArray = new Animal[10];
+    /**
+     * variable to keep track of objects in the array
+     */
+    private int count = 0;
+    /**
+     * Array to hold mammal and reptile objects
+     */
+    private final Animal[] animalsArray = new Animal[10];
     /**
      * GUI component for getting the name
      */
@@ -68,7 +77,7 @@ public class SimpleGUI extends JFrame implements ActionListener {
     /**
      * A temporary GUI component for validating data
      */
-    private JTextArea verifyArea = new JTextArea(20, 35);
+    protected JTextArea verifyArea = new JTextArea(20, 35);
 
     /**
      * Main method launching the application.
@@ -111,17 +120,20 @@ public class SimpleGUI extends JFrame implements ActionListener {
         buttonPanel.setLayout(new GridLayout(1, 3, 5, 5));
 
         addReptileButton = new JButton();
+        addMammalButton = new JButton();
         try {
-            Image reptiles = ImageIO.read(getClass().getResource("reptiles.jpg"));
+            Image reptiles = ImageIO.read(getClass().getResource("reptiles."
+                    + "jpg"));
             addReptileButton.setIcon(new ImageIcon(reptiles));
-        } catch (IOException ex) {
+        } catch (IOException e) {
         }
         addMammalButton = new JButton();
         try {
             Image mammals = ImageIO.read(getClass().getResource("mammals.jpg"));
             addMammalButton.setIcon(new ImageIcon(mammals));
-        } catch (IOException ex) {
+        } catch (IOException e) {
         }
+
         displayAnimalsButton = new JButton("Display Animals");
 
         addReptileButton.setToolTipText("Press to add Reptile");
@@ -152,107 +164,124 @@ public class SimpleGUI extends JFrame implements ActionListener {
         Object object = ev.getSource();
         //verifyArea.setText("");
         if (object == addReptileButton) {
-            verifyArea.append("\nAdd Reptile button presed\n");
-            verifyArea.append("name:" + namePanel.getText() + " age: "
-                    + agePanel.getValue() + " weight: " + weightPanel.getValue()
-                    + " length: " + lengthPanel.getValue() + " color: "
-                    + colorPanel.getText());
+
+            if (count != 10) {
+
+                verifyArea.append("\nAdd Reptile button pressed...\n");
+                animalsArray[count] = new Reptile(namePanel.getText(),
+                        weightPanel.getValue(), agePanel.getValue(),
+                        lengthPanel.getValue());
+                count++;
+                verifyArea.append("Reptile sucessfully added! " + (10 - count)
+                        + " space(s) left in the array.\n" + "\n");
+            } else {
+                verifyArea.append("\nFAILED TO ADD ANIMAL. NO SPACE LEFT "
+                        + "IN ARRAY!\n");
+            }
         } else if (object == addMammalButton) {
-            verifyArea.append("\nAdd Mammal button pressed\n");
-            verifyArea.append("name:" + namePanel.getText() + " age: "
-                    + agePanel.getValue() + " weight: " + weightPanel.getValue()
-                    + " length: " + lengthPanel.getValue() + " color: "
-                    + colorPanel.getText());
+
+            if (count != 10) {
+
+                verifyArea.append("\nAdd Mammal button pressed...\n");
+                animalsArray[count] = new Mammal(namePanel.getText(),
+                        weightPanel.getValue(), agePanel.getValue(),
+                        colorPanel.getText());
+                count++;
+                verifyArea.append("Mammal sucessfully added! " + (10 - count)
+                        + " space(s) left in the array.\n" + "\n");
+            } else {
+                verifyArea.append("\nFAILED TO ADD ANIMAL. NO SPACE LEFT "
+                        + "IN ARRAY!\n");
+            }
         } else if (object == displayAnimalsButton) {
-            verifyArea.append("\nDisplay button pressed\n");
-            verifyArea.append("name:" + namePanel.getText() + " age: "
-                    + agePanel.getValue() + " weight: " + weightPanel.getValue()
-                    + " length: " + lengthPanel.getValue() + " color: "
-                    + colorPanel.getText());
-        } else if (object == colorPanel) {
-
+            verifyArea.append("\nDisplay button pressed..." + "\n");
+            for (int i = 0; i < count; i++) {
+                verifyArea.append(animalsArray[i].toString() + "\n");
+            }
         }
     }
-}
-
-/**
- * A panel prompting for String input. It contains a label and a text field.
- */
-class GetInputPanel extends JPanel {
-
-    private JTextField inputField;  //used for the user input
 
     /**
-     * Constructor sets up a label and the text field
-     *
-     * @param size the size of the input text field
-     * @param prompt the message specifying expected input
+     * A panel prompting for String input. It contains a label and a text field.
      */
-    public GetInputPanel(int size, String prompt) {
-        inputField = new JTextField(size);
-        add(new JLabel(prompt));
-        add(inputField);
-    }
+    class GetInputPanel extends JPanel {
 
-    /**
-     * Gets the text from the text field
-     *
-     * @return Returns the text from the text field
-     */
-    public String getText() {
-        return inputField.getText();
-    }
+        private JTextField inputField;  //used for the user input
 
-    /**
-     * Converts the text field value into a number and displays an error message
-     * when inputed data contains non digit characters
-     *
-     * @return the integer represented by the user input
-     */
-    public double getValue() {
-        double value = 0.0;
-        try {
-            value = Double.parseDouble(inputField.getText());
-        } catch (NumberFormatException ex) {
-            JOptionPane.showMessageDialog(null, "Invalid characters in the number",
-                    "Input Error", JOptionPane.ERROR_MESSAGE);
+        /**
+         * Constructor sets up a label and the text field
+         *
+         * @param size the size of the input text field
+         * @param prompt the message specifying expected input
+         */
+        public GetInputPanel(int size, String prompt) {
+            inputField = new JTextField(size);
+            add(new JLabel(prompt));
+            add(inputField);
         }
-        return value;
-    }
-}
 
-/**
- * This panel represents a panel with a label and a combo box.
- */
-class GetComboPanel extends JPanel {
-
-    JLabel label;   //explains the purpose of the combo box
-    JComboBox combo; //used for the user input
-
-    /**
-     * Constructor sets up a panel with a label and a combo box.
-     *
-     * @param message the text indicating the purpose of the combo box
-     * @param numChoices the range of choices displayed in the combo box
-     */
-    public GetComboPanel(String message, int numChoices) {
-        String[] data = new String[numChoices];
-        for (int i = 0; i < data.length; i++) {
-            data[i] = i + 1 + "";
+        /**
+         * Gets the text from the text field
+         *
+         * @return Returns the text from the text field
+         */
+        public String getText() {
+            return inputField.getText();
         }
-        combo = new JComboBox(data);
-        add(new JLabel(message));
-        add(combo);
+
+        /**
+         * Converts the text field value into a number and displays an error
+         * message when inputed data contains non digit characters
+         *
+         * @return the integer represented by the user input
+         */
+        public double getValue() {
+            double value = 0.0;
+            try {
+                value = Double.parseDouble(inputField.getText());
+            } catch (NumberFormatException ex) {
+                JOptionPane.showMessageDialog(null, "Invalid characters in "
+                        + "the number",
+                        "Input Error", JOptionPane.ERROR_MESSAGE);
+            }
+            return value;
+        }
     }
 
     /**
-     * Gets the value from the combo box
-     *
-     * @return value selected from the combo box
+     * This panel represents a panel with a label and a combo box.
      */
-    public int getValue() {
-        int a;
-        a = Integer.parseInt((String) combo.getSelectedItem());
-        return a;
+    class GetComboPanel extends JPanel {
+
+        JLabel label;   //explains the purpose of the combo box
+        JComboBox combo; //used for the user input
+
+        /**
+         * Constructor sets up a panel with a label and a combo box.
+         *
+         * @param message the text indicating the purpose of the combo box
+         * @param numChoices the range of choices displayed in the combo box
+         */
+        public GetComboPanel(String message, int numChoices) {
+            String[] data = new String[numChoices];
+            for (int i = 0; i < data.length; i++) {
+                data[i] = i + 1 + "";
+            }
+            combo = new JComboBox(data);
+            add(new JLabel(message));
+            add(combo);
+        }
+
+        /**
+         * Gets the value from the combo box
+         *
+         * @return value selected from the combo box
+         */
+        public int getValue() {
+            int a;
+            a = Integer.parseInt((String) combo.getSelectedItem());
+            return a;
+        }
+
     }
 }

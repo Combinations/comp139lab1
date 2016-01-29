@@ -1,13 +1,18 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
+ * To change this lice
+
+
+nse header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
 package animal;
 
 /**
+ * Reptile.java This program describes some basic properties of a reptile. It
+ * inherits the Animal class.
  *
- * @author James
+ * @author James Leahy
  */
 public class Reptile extends Animal {
 
@@ -56,8 +61,13 @@ public class Reptile extends Animal {
 
     }
 
+    /**
+     *
+     * @return the content of the instance variables as a string
+     */
     public String toString() {
-        String x = "";
+        String x = "name: " + name + " type: reptile" + " weight: " + weight + " age:" + age
+                + " length: " + length;
         return x;
     }
 }
