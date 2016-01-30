@@ -8,6 +8,8 @@ package GUI;
 import animal.Animal;
 import animal.Mammal;
 import animal.Reptile;
+import exceptions.InvalidNameException;
+import exceptions.InvalidWeightException;
 import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.GridLayout;
@@ -162,26 +164,22 @@ public class SimpleGUI extends JFrame implements ActionListener {
      */
     public void actionPerformed(ActionEvent ev) {
         Object object = ev.getSource();
-        //verifyArea.setText("");
+
         if (object == addReptileButton) {
+            handleReptileButton();
 
-            if (count != 10) {
-
-                verifyArea.append("\nAdd Reptile button pressed...\n");
-                animalsArray[count] = new Reptile(namePanel.getText(),
-                        weightPanel.getValue(), agePanel.getValue(),
-                        lengthPanel.getValue());
-                count++;
-                verifyArea.append("Reptile sucessfully added! " + (10 - count)
-                        + " space(s) left in the array.\n" + "\n");
-            } else {
-                verifyArea.append("\nFAILED TO ADD ANIMAL. NO SPACE LEFT "
-                        + "IN ARRAY!\n");
-            }
         } else if (object == addMammalButton) {
+            handleMammalButton();
 
-            if (count != 10) {
+        } else if (object == displayAnimalsButton) {
+            handleDisplayButton();
+        }
+    }
 
+    private void handleMammalButton() {
+        if (count != 10) {
+
+            try {
                 verifyArea.append("\nAdd Mammal button pressed...\n");
                 animalsArray[count] = new Mammal(namePanel.getText(),
                         weightPanel.getValue(), agePanel.getValue(),
@@ -189,15 +187,47 @@ public class SimpleGUI extends JFrame implements ActionListener {
                 count++;
                 verifyArea.append("Mammal sucessfully added! " + (10 - count)
                         + " space(s) left in the array.\n" + "\n");
-            } else {
-                verifyArea.append("\nFAILED TO ADD ANIMAL. NO SPACE LEFT "
-                        + "IN ARRAY!\n");
+            } catch (InvalidWeightException x) {
+                verifyArea.append("\n Failed to add Mammal. "
+                        + "Weight must be greater than 0!\n");
+            } catch (InvalidNameException z) {
+                verifyArea.append("\n Failed to add Mammal. Name length "
+                        + "must be greater than two characters!\n");
             }
-        } else if (object == displayAnimalsButton) {
-            verifyArea.append("\nDisplay button pressed..." + "\n");
-            for (int i = 0; i < count; i++) {
-                verifyArea.append(animalsArray[i].toString() + "\n");
+        } else {
+            verifyArea.append("\nFAILED TO ADD ANIMAL. NO SPACE LEFT "
+                    + "IN ARRAY!\n");
+        }
+    }
+
+    private void handleReptileButton() {
+        if (count != 10) {
+
+            try {
+                verifyArea.append("\nAdd Reptile button pressed...\n");
+                animalsArray[count] = new Reptile(namePanel.getText(),
+                        weightPanel.getValue(), agePanel.getValue(),
+                        lengthPanel.getValue());
+                count++;
+                verifyArea.append("Reptile sucessfully added! " + (10 - count)
+                        + " space(s) left in the array.\n" + "\n");
+            } catch (InvalidWeightException x) {
+                verifyArea.append("\n Failed to add Reptile. "
+                        + "Weight must be greater than 0!\n");
+            } catch (InvalidNameException z) {
+                verifyArea.append("\n Failed to add Reptile. Name length "
+                        + "must be greater than two characters!\n");
             }
+        } else {
+            verifyArea.append("\nFAILED TO ADD REPTILE. NO SPACE LEFT "
+                    + "IN ARRAY!\n");
+        }
+    }
+
+    private void handleDisplayButton() {
+        verifyArea.append("\nDisplay button pressed..." + "\n");
+        for (int i = 0; i < count; i++) {
+            verifyArea.append(animalsArray[i].toString() + "\n");
         }
     }
 
@@ -240,9 +270,8 @@ public class SimpleGUI extends JFrame implements ActionListener {
             try {
                 value = Double.parseDouble(inputField.getText());
             } catch (NumberFormatException ex) {
-                JOptionPane.showMessageDialog(null, "Invalid characters in "
-                        + "the number",
-                        "Input Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Invalid Input(s)");
+
             }
             return value;
         }

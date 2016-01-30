@@ -6,10 +6,7 @@
 package animal;
 
 import exceptions.InvalidNameException;
-import static exceptions.InvalidNameException.InvalidNameException;
 import exceptions.InvalidWeightException;
-import static exceptions.InvalidWeightException.InvalidWeightException;
-import javax.swing.JOptionPane;
 
 /**
  * Animal.java This program describes some basic properties of an animal. It
@@ -39,21 +36,21 @@ public class Animal {
      * @param n String value that represents a name.
      * @param w Double value that represents the weight of an animal.
      * @param a Integer value that represents the age of an animal.
+     * @throws exceptions.InvalidNameException
+     * @throws exceptions.InvalidWeightException
      * @throw NumberformatException
      */
-    public Animal(String n, Double w, int a) {
-        age = a;
-        try {
-            InvalidWeightException(w);
+    public Animal(String n, Double w, int a) throws InvalidNameException, 
+            InvalidWeightException {
+        if (n.length() > 2 && w > 0) {
+            age = a;
             weight = w;
-        } catch (InvalidWeightException e) {
-            JOptionPane.showMessageDialog(null, "Weight must be > 0");
-        }
-        try {
-            InvalidNameException(n);
             name = n;
-        } catch (InvalidNameException e) {
-            JOptionPane.showMessageDialog(null, "Name length must be > 2");
+        } else if (n.length() <= 2) {
+            throw new InvalidNameException("name too short");
+
+        } else {
+            throw new InvalidWeightException();
         }
 
     }
@@ -62,14 +59,14 @@ public class Animal {
      * changes the name variable to the String parameter specified by the user.
      *
      * @param changeName String value that represents the name of an animal.
+     * @throws exceptions.InvalidNameException
      *
      */
-    public void setName(String changeName) {
-        try {
-            InvalidNameException(changeName);
+    public void setName(String changeName) throws InvalidNameException {
+        if (changeName.length() > 2) {
             name = changeName;
-        } catch (InvalidNameException e) {
-            JOptionPane.showMessageDialog(null, "Name length must be > 2");
+        } else {
+            throw new InvalidNameException("");
         }
     }
 
@@ -86,14 +83,15 @@ public class Animal {
      * changes the weight of an animal to the value specified by the user.
      *
      * @param changeWeight Double value that represents the weight of an Animal.
+     * @throws exceptions.InvalidWeightException
      */
-    public void setWeight(double changeWeight) {
-        try {
-            InvalidWeightException(changeWeight);
+    public void setWeight(double changeWeight) throws InvalidWeightException {
+        if (changeWeight > 2) {
             weight = changeWeight;
-        } catch (InvalidWeightException e) {
-            JOptionPane.showMessageDialog(null, "Weight must be > 0");
+        } else {
+            throw new InvalidWeightException();
         }
+
     }
 
     /**

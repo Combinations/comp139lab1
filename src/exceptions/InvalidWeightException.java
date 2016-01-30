@@ -14,14 +14,9 @@ public class InvalidWeightException extends Exception {
     /**
      * Creates a new instance of InvalidWeightException
      *
-     * @param i
-     * @throws exceptions.InvalidWeightException
      */
-    public static void InvalidWeightException(double i) throws
-            InvalidWeightException {
-        if (i <= 0) {
-            InvalidWeightException myException = new InvalidWeightException();
-            throw myException;
+    public InvalidWeightException() {
+            super();
         }
-    }
-}
+ }
+

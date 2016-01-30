@@ -8,6 +8,9 @@ nse header, choose License Headers in Project Properties.
  */
 package animal;
 
+import exceptions.InvalidNameException;
+import exceptions.InvalidWeightException;
+
 /**
  * Reptile.java This program describes some basic properties of a reptile. It
  * inherits the Animal class.
@@ -28,9 +31,12 @@ public class Reptile extends Animal {
      * @param w Double value that represents the weight of a reptile.
      * @param a Integer value that represents the age of a reptile.
      * @param l Integer value that represents the length of a reptile.
+     * @throws exceptions.InvalidNameException
+     * @throws exceptions.InvalidWeightException
      * @throw NumberformatException
      */
-    public Reptile(String n, Double w, int a, int l) {
+    public Reptile(String n, Double w, int a, int l) throws 
+            InvalidNameException, InvalidWeightException {
         super(n, w, a);
         length = l;
     }

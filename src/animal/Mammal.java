@@ -5,6 +5,9 @@
  */
 package animal;
 
+import exceptions.InvalidNameException;
+import exceptions.InvalidWeightException;
+
 /**
  * Mammal.java This program describes some basic properties of a mammal. It
  * inherits the Animal class.
@@ -25,11 +28,15 @@ public class Mammal extends Animal {
      * @param w Double value that represents the weight of a mammal.
      * @param a Integer value that represents the age of a mammal.
      * @param c String value that represents the color of a mammal.
+     * @throws exceptions.InvalidNameException
+     * @throws exceptions.InvalidWeightException
      * @throw NumberformatException
      */
-    public Mammal(String n, Double w, int a, String c) {
+    public Mammal(String n, Double w, int a, String c) throws InvalidNameException, 
+            InvalidWeightException {
         super(n, w, a);
         color = c;
+        
     }
 
     /**

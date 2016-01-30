@@ -14,12 +14,9 @@ public class InvalidNameException extends Exception {
      * @param description
      * @throws exceptions.InvalidNameException
      */
-    public static void InvalidNameException(String description) throws
-            InvalidNameException {
-        if (description.length() <= 2) {
-            InvalidNameException myException = new InvalidNameException();
-            throw myException;
+    public InvalidNameException(String description) {
+            super(description);
         }
     }
 
-}
+
