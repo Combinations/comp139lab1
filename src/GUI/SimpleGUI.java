@@ -79,7 +79,11 @@ public class SimpleGUI extends JFrame implements ActionListener {
     /**
      * A temporary GUI component for validating data
      */
-    protected JTextArea verifyArea = new JTextArea(20, 35);
+    protected JTextArea verifyArea = new JTextArea("\nFill in the input fields"
+            + " and click on an animal picture to add an animal to the array\n "
+            + "-----------------------------------------"
+            + "-------------------------------------------------"
+            + "--------------------", 20, 35);
 
     /**
      * Main method launching the application.
@@ -166,68 +170,58 @@ public class SimpleGUI extends JFrame implements ActionListener {
         Object object = ev.getSource();
 
         if (object == addReptileButton) {
-            handleReptileButton();
+            handleAnimalButton("reptile");
 
         } else if (object == addMammalButton) {
-            handleMammalButton();
+            handleAnimalButton("mammal");
 
         } else if (object == displayAnimalsButton) {
             handleDisplayButton();
         }
     }
 
-    private void handleMammalButton() {
+    private void handleAnimalButton(String type) {
+
         if (count != 10) {
 
             try {
-                verifyArea.append("\nAdd Mammal button pressed...\n");
-                animalsArray[count] = new Mammal(namePanel.getText(),
-                        weightPanel.getValue(), agePanel.getValue(),
-                        colorPanel.getText());
+                verifyArea.append(
+                        "\nAdd " + type + " button pressed...\n"
+                );
+                if (type.equals("mammal")) {
+                    animalsArray[count] = new Mammal(namePanel.getText(),
+                            weightPanel.getValue(), agePanel.getValue(),
+                            colorPanel.getText());
+                } else {
+                    animalsArray[count] = new Reptile(namePanel.getText(),
+                            weightPanel.getValue(), agePanel.getValue(),
+                            lengthPanel.getValue());
+                }
                 count++;
-                verifyArea.append("Mammal sucessfully added! " + (10 - count)
+                verifyArea.append(type + " Sucessfully added! " + (10 - count)
                         + " space(s) left in the array.\n" + "\n");
             } catch (InvalidWeightException x) {
-                verifyArea.append("\n Failed to add Mammal. "
-                        + "Weight must be greater than 0!\n");
+                verifyArea.append("Failed to add " + type
+                        + "! Weight must be greater than 0!\n");
             } catch (InvalidNameException z) {
-                verifyArea.append("\n Failed to add Mammal. Name length "
+                verifyArea.append("Failed to add " + type + "! Name length "
                         + "must be greater than two characters!\n");
             }
         } else {
-            verifyArea.append("\nFAILED TO ADD ANIMAL. NO SPACE LEFT "
-                    + "IN ARRAY!\n");
+            verifyArea.append("\nFAILED TO ADD " + type.toUpperCase() + "."
+                    + " NO SPACE LEFT " + "IN THE ARRAY!\n");
         }
     }
-
-    private void handleReptileButton() {
-        if (count != 10) {
-
-            try {
-                verifyArea.append("\nAdd Reptile button pressed...\n");
-                animalsArray[count] = new Reptile(namePanel.getText(),
-                        weightPanel.getValue(), agePanel.getValue(),
-                        lengthPanel.getValue());
-                count++;
-                verifyArea.append("Reptile sucessfully added! " + (10 - count)
-                        + " space(s) left in the array.\n" + "\n");
-            } catch (InvalidWeightException x) {
-                verifyArea.append("\n Failed to add Reptile. "
-                        + "Weight must be greater than 0!\n");
-            } catch (InvalidNameException z) {
-                verifyArea.append("\n Failed to add Reptile. Name length "
-                        + "must be greater than two characters!\n");
-            }
-        } else {
-            verifyArea.append("\nFAILED TO ADD REPTILE. NO SPACE LEFT "
-                    + "IN ARRAY!\n");
-        }
-    }
+    
 
     private void handleDisplayButton() {
-        verifyArea.append("\nDisplay button pressed..." + "\n");
-        for (int i = 0; i < count; i++) {
-            verifyArea.append(animalsArray[i].toString() + "\n");
+        if (animalsArray[0] == null) {
+            verifyArea.append("\n The array is empty. No animals to display.\n");
+        } else {
+            verifyArea.append("\nDisplay button pressed...\n");
+            for (int i = 0; i < count; i++) {
+                verifyArea.append(animalsArray[i].toString() + "\n");
+            }
         }
     }
 
@@ -270,7 +264,6 @@ public class SimpleGUI extends JFrame implements ActionListener {
             try {
                 value = Double.parseDouble(inputField.getText());
             } catch (NumberFormatException ex) {
-                JOptionPane.showMessageDialog(null, "Invalid Input(s)");
 
             }
             return value;

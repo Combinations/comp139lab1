@@ -7,6 +7,7 @@ package animal;
 
 import exceptions.InvalidNameException;
 import exceptions.InvalidWeightException;
+import javax.swing.JTextArea;
 
 /**
  * Mammal.java This program describes some basic properties of a mammal. It
@@ -32,11 +33,11 @@ public class Mammal extends Animal {
      * @throws exceptions.InvalidWeightException
      * @throw NumberformatException
      */
-    public Mammal(String n, Double w, int a, String c) throws InvalidNameException, 
+    public Mammal(String n, Double w, int a, String c) throws InvalidNameException,
             InvalidWeightException {
         super(n, w, a);
         color = c;
-        
+
     }
 
     /**
@@ -60,9 +61,13 @@ public class Mammal extends Animal {
 
     /**
      * displays the contents of the global variables.
+     *
+     * @param t text area
      */
-    public void display() {
-
+    public void display(JTextArea t) {
+        t.append("name: " + name + " type: mammal" + " weight: " + weight
+                + " age:" + age
+                + " color: " + color);
     }
 
     /**
@@ -70,8 +75,10 @@ public class Mammal extends Animal {
      * @return the contents of the instance variables as a string value
      */
     public String toString() {
-        String x = "name: " + name + " type: mammal" + " weight: " + weight + " age:" + age
+        String x = "name: " + name + " type: mammal" + " weight: " + weight
+                + " age:" + age
                 + " color: " + color;
         return x;
     }
+
 }

@@ -10,6 +10,7 @@ package animal;
 
 import exceptions.InvalidNameException;
 import exceptions.InvalidWeightException;
+import javax.swing.JTextArea;
 
 /**
  * Reptile.java This program describes some basic properties of a reptile. It
@@ -35,7 +36,7 @@ public class Reptile extends Animal {
      * @throws exceptions.InvalidWeightException
      * @throw NumberformatException
      */
-    public Reptile(String n, Double w, int a, int l) throws 
+    public Reptile(String n, Double w, int a, int l) throws
             InvalidNameException, InvalidWeightException {
         super(n, w, a);
         length = l;
@@ -62,8 +63,13 @@ public class Reptile extends Animal {
 
     /**
      * displays the contents of the instance variables.
+     *
+     * @param t
      */
-    public void display() {
+    public void display(JTextArea t) {
+        t.append("name: " + name + " type: reptile" + " weight: " + weight
+                + " age:" + age
+                + " length: " + length);
 
     }
 
@@ -72,7 +78,8 @@ public class Reptile extends Animal {
      * @return the content of the instance variables as a string
      */
     public String toString() {
-        String x = "name: " + name + " type: reptile" + " weight: " + weight + " age:" + age
+        String x = "name: " + name + " type: reptile" + " weight: " + weight
+                + " age:" + age
                 + " length: " + length;
         return x;
     }
