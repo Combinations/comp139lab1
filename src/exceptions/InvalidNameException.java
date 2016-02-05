@@ -12,11 +12,9 @@ public class InvalidNameException extends Exception {
     /**
      * Creates a new instance of InvalidNameException
      *
-     * 
+     *
      */
     public InvalidNameException() {
-            super();
-        }
+        super();
     }
-
-
+}

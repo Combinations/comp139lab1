@@ -1,4 +1,3 @@
-
 package animal;
 
 import exceptions.InvalidNameException;
@@ -27,7 +26,7 @@ public class Reptile extends Animal {
      * @param l Integer value that represents the length of a reptile.
      * @throws exceptions.InvalidNameException if name length < 3
      * @throws exceptions.InvalidWeightException if weight <=0
-     * 
+     *
      */
     public Reptile(String n, Double w, int a, int l) throws
             InvalidNameException, InvalidWeightException {

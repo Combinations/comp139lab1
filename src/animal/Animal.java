@@ -1,4 +1,3 @@
-
 package animal;
 
 import exceptions.InvalidNameException;
@@ -34,10 +33,11 @@ public class Animal {
      * @param w Double value that represents the weight of an animal.
      * @param a Integer value that represents the age of an animal.
      * @throws exceptions.InvalidNameException if name < 3 characters
-     * @throws exceptions.InvalidWeightException if weight <=0
-     * 
+     * @throw
+     * s exceptions.InvalidWeightException if weight <=0
+     *
      */
-    public Animal(String n, Double w, int a) throws InvalidNameException, 
+    public Animal(String n, Double w, int a) throws InvalidNameException,
             InvalidWeightException {
         if (n.length() > 2 && w > 0) {
             age = a;
@@ -120,6 +120,7 @@ public class Animal {
 
     /**
      * Display the contents of the global variables.
+     *
      * @param output text area to output contents of instance variables
      */
     public void display(JTextArea output) {
