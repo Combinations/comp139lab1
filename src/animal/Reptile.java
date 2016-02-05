@@ -1,11 +1,4 @@
-/*
- * To change this lice
 
-
-nse header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package animal;
 
 import exceptions.InvalidNameException;
@@ -32,9 +25,9 @@ public class Reptile extends Animal {
      * @param w Double value that represents the weight of a reptile.
      * @param a Integer value that represents the age of a reptile.
      * @param l Integer value that represents the length of a reptile.
-     * @throws exceptions.InvalidNameException
-     * @throws exceptions.InvalidWeightException
-     * @throw NumberformatException
+     * @throws exceptions.InvalidNameException if name length < 3
+     * @throws exceptions.InvalidWeightException if weight <=0
+     * 
      */
     public Reptile(String n, Double w, int a, int l) throws
             InvalidNameException, InvalidWeightException {
@@ -64,7 +57,7 @@ public class Reptile extends Animal {
     /**
      * displays the contents of the instance variables.
      *
-     * @param t
+     * @param t JTextArea where output is displayed
      */
     public void display(JTextArea t) {
         t.append("name: " + name + " type: reptile" + " weight: " + weight

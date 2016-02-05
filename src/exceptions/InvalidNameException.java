@@ -1,5 +1,6 @@
 /**
  * InvalidNameException.java
+ * generates an exception if name is invalid
  */
 package exceptions;
 
@@ -11,11 +12,10 @@ public class InvalidNameException extends Exception {
     /**
      * Creates a new instance of InvalidNameException
      *
-     * @param description
-     * @throws exceptions.InvalidNameException
+     * 
      */
-    public InvalidNameException(String description) {
-            super(description);
+    public InvalidNameException() {
+            super();
         }
     }
 

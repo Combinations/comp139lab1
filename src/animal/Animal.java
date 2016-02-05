@@ -1,12 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package animal;
 
 import exceptions.InvalidNameException;
 import exceptions.InvalidWeightException;
+import javax.swing.JTextArea;
 
 /**
  * Animal.java This program describes some basic properties of an animal. It
@@ -36,9 +33,9 @@ public class Animal {
      * @param n String value that represents a name.
      * @param w Double value that represents the weight of an animal.
      * @param a Integer value that represents the age of an animal.
-     * @throws exceptions.InvalidNameException
-     * @throws exceptions.InvalidWeightException
-     * @throw NumberformatException
+     * @throws exceptions.InvalidNameException if name < 3 characters
+     * @throws exceptions.InvalidWeightException if weight <=0
+     * 
      */
     public Animal(String n, Double w, int a) throws InvalidNameException, 
             InvalidWeightException {
@@ -47,7 +44,7 @@ public class Animal {
             weight = w;
             name = n;
         } else if (n.length() <= 2) {
-            throw new InvalidNameException("name too short");
+            throw new InvalidNameException();
 
         } else {
             throw new InvalidWeightException();
@@ -59,14 +56,14 @@ public class Animal {
      * changes the name variable to the String parameter specified by the user.
      *
      * @param changeName String value that represents the name of an animal.
-     * @throws exceptions.InvalidNameException
+     * @throws exceptions.InvalidNameException if name length is less than 3.
      *
      */
     public void setName(String changeName) throws InvalidNameException {
         if (changeName.length() > 2) {
             name = changeName;
         } else {
-            throw new InvalidNameException("");
+            throw new InvalidNameException();
         }
     }
 
@@ -83,10 +80,10 @@ public class Animal {
      * changes the weight of an animal to the value specified by the user.
      *
      * @param changeWeight Double value that represents the weight of an Animal.
-     * @throws exceptions.InvalidWeightException
+     * @throws exceptions.InvalidWeightException if weight <= 0
      */
     public void setWeight(double changeWeight) throws InvalidWeightException {
-        if (changeWeight > 2) {
+        if (changeWeight > 0) {
             weight = changeWeight;
         } else {
             throw new InvalidWeightException();
@@ -123,9 +120,11 @@ public class Animal {
 
     /**
      * Display the contents of the global variables.
+     * @param output text area to output contents of instance variables
      */
-    public void display() {
+    public void display(JTextArea output) {
         String values = toString();
+        output.append(values);
 
     }
 

@@ -29,9 +29,9 @@ public class Mammal extends Animal {
      * @param w Double value that represents the weight of a mammal.
      * @param a Integer value that represents the age of a mammal.
      * @param c String value that represents the color of a mammal.
-     * @throws exceptions.InvalidNameException
-     * @throws exceptions.InvalidWeightException
-     * @throw NumberformatException
+     * @throws exceptions.InvalidNameException if name length < 3
+     * @throws exceptions.InvalidWeightException if weight <= 0
+     * 
      */
     public Mammal(String n, Double w, int a, String c) throws InvalidNameException,
             InvalidWeightException {
