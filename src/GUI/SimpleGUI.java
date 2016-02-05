@@ -179,7 +179,6 @@ public class SimpleGUI extends JFrame implements ActionListener {
      *
      * @param type string value used to determine if mammal or reptile
      * @throws InvalidNameException if name < 3
- * @
      * throws InvalidWeightException if weight <=0
      */
     private void handleAnimalButton(String type) {
